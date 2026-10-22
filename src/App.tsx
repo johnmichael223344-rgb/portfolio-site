@@ -223,6 +223,13 @@ export default function App() {
                 <span>OPEN TO SELECT OPPORTUNITIES</span>
               </div>
               <p className="hero-kicker">VISUAL DESIGN <i /> APPLICATION DEVELOPMENT</p>
+              <img
+                className="hero-index-photo"
+                src={`${import.meta.env.BASE_URL}images/temporary-profile.webp`}
+                srcSet={`${import.meta.env.BASE_URL}images/temporary-profile-128.webp 128w, ${import.meta.env.BASE_URL}images/temporary-profile-320.webp 320w`}
+                sizes="(max-width: 620px) 68px, 156px"
+                alt="Temporary profile picture of John Michael"
+              />
               <h1>
                 JOHN MICHAEL
                 <br />
@@ -244,15 +251,6 @@ export default function App() {
                   ABOUT ME
                 </a>
               </div>
-            </div>
-            <div className="hero-index">
-              <img
-                className="hero-index-photo"
-                src={`${import.meta.env.BASE_URL}images/temporary-profile.webp`}
-                srcSet={`${import.meta.env.BASE_URL}images/temporary-profile-128.webp 128w, ${import.meta.env.BASE_URL}images/temporary-profile-320.webp 320w`}
-                sizes="(max-width: 620px) 68px, 156px"
-                alt="Temporary profile picture of John Michael"
-              />
               <div className="hero-verse">
                 <span>&ldquo;{verse.quote}&rdquo;</span>
                 <span>{verse.reference}</span>
