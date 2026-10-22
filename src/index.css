@@ -166,9 +166,8 @@ a { color: inherit; }
 .btn-primary:hover { box-shadow: 2px 2px 0 #126ca2; }
 .btn-secondary, .btn-accent { border-color: rgba(255, 72, 200, .75); background: rgba(7, 11, 27, .55); color: #fff; box-shadow: 4px 4px 0 rgba(255, 72, 200, .35); }
 .btn-secondary:hover, .btn-accent:hover { background: rgba(255, 72, 200, .18); }
-.hero-index { display: grid; justify-items: end; gap: 4px; color: rgba(196, 216, 255, .8); font: 9px "DM Mono", monospace; letter-spacing: .12em; }
-.hero-verse { display: grid; justify-items: end; gap: 6px; }
-.hero-verse span:last-child { color: var(--cyan); }
+.hero-verse { display: grid; justify-items: start; gap: 6px; margin-top: 22px; color: rgba(243, 220, 209, .86); font: 10px "DM Mono", monospace; letter-spacing: .1em; line-height: 1.6; }
+.hero-verse span:last-child { color: #efb395; }
 .scroll-cue { position: absolute; z-index: 3; bottom: 30px; left: max(24px, calc((100vw - 1120px) / 2)); display: flex; align-items: center; gap: 10px; color: #c0c9e8; font-size: 9px; text-decoration: none; }
 .scroll-square { width: 9px; height: 9px; border: 1px solid var(--pink); box-shadow: 0 0 8px var(--pink); }
 
@@ -373,7 +372,6 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 .btn { font-family: "DM Mono", monospace; border-radius: 2px; }
 .btn-primary { border-color: #dda384; background: #dda384; box-shadow: none; color: #211c20; }
 .btn-secondary, .btn-accent { border-color: rgba(243,220,209,.52); background: rgba(25,21,29,.25); box-shadow: none; color: #fff7f2; }
-.hero-index strong { font: 600 34px "Space Grotesk", system-ui, sans-serif; color: #efb395; text-shadow: none; }
 .city-scene {
   background:
     linear-gradient(180deg, rgba(25,20,41,.08) 0%, rgba(41,29,50,.08) 35%, rgba(24,22,37,.5) 73%, #171722 100%),
@@ -567,7 +565,7 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   }
 }
 
-/* Temporary square profile picture in the hero */
+/* Temporary square profile picture above the hero title */
 .hero-index-photo {
   display: block;
   width: clamp(112px, 13vw, 156px);
@@ -575,26 +573,16 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   object-fit: cover;
   border: 2px solid rgba(243, 220, 209, .78);
   box-shadow: 5px 5px 0 rgba(167, 80, 94, .8);
-  margin-bottom: 12px;
+  margin: 16px 0 20px;
 }
 @media (max-width: 800px) {
-  .hero-index {
-    display: grid;
-    position: absolute;
-    z-index: 3;
-    top: 14px;
-    right: max(24px, calc((100vw - 1120px) / 2));
-    gap: 3px;
-  }
-  .hero-index-photo { width: 76px; margin-bottom: 3px; }
-  .hero-index > span { font-size: 7px; }
+  .hero-index-photo { width: 88px; }
 }
 @media (max-width: 620px) {
   .hero-inner { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding-top: 22px; padding-bottom: 100px; }
-  .hero-index { position: relative; top: auto; right: auto; display: flex; align-items: center; justify-items: initial; align-self: flex-start; order: -1; gap: 12px; margin: 0 0 16px; letter-spacing: .06em; }
-  .hero-index-photo { width: 68px; flex: 0 0 auto; margin: 0; }
-  .hero-verse { justify-items: start; gap: 7px; font-size: 8px; line-height: 1.5; }
-  .hero-verse span { max-width: 220px; }
+  .hero-index-photo { width: 68px; margin: 10px 0 16px; }
+  .hero-verse { justify-items: start; gap: 5px; margin-top: 18px; font-size: 8px; line-height: 1.5; }
+  .hero-verse span { max-width: 260px; }
   .hero-copy { margin: 0; padding: 14px 14px 22px; }
 }
 
