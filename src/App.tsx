@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 type ProjectCategory = "hackathon" | "nc_iii" | "capstone";
 type CertificateCategory = "all" | "design" | "technology" | "non_developer";
@@ -136,77 +136,12 @@ const bibleVerses = [
   { quote: "THE LORD IS MY SHEPHERD", reference: "PSALM 23:1" },
 ];
 
-const skyline = Array.from({ length: 24 }, (_, index) => ({
-  left: (index / 24) * 100,
-  width: 3 + ((index * 7) % 5),
-  height: 20 + ((index * 19) % 54),
-  delay: (index % 5) * 0.28,
-}));
-
 function SectionLabel({ children }: { children: ReactNode }) {
   return <h2 className="section-label">{children}</h2>;
 }
 
 function Cityscape() {
-  return (
-    <div className="city-scene" aria-hidden="true">
-      <picture className="city-background-picture">
-        <source
-          type="image/avif"
-          srcSet={`${import.meta.env.BASE_URL}images/neon-pixel-boulevard.avif`}
-        />
-        <img
-          className="city-background"
-          fetchPriority="high"
-          decoding="async"
-          src={`${import.meta.env.BASE_URL}images/neon-pixel-boulevard.webp`}
-          alt=""
-        />
-      </picture>
-      <div className="city-scanlines" />
-      <div className="planet-orbit">
-        <span className="planet" />
-      </div>
-      <div className="neon-sign sign-helix">HELIX<br />LABS</div>
-      <div className="neon-sign sign-delta">DELTA<br />DISTRICT</div>
-      <div className="neon-sign sign-arcade">NIGHT<br />ARCADE</div>
-      <div className="skyline skyline-back">
-        {skyline.map((building, index) => (
-          <span
-            className="building"
-            key={`back-${index}`}
-            style={{
-              left: `${building.left}%`,
-              width: `${building.width}%`,
-              height: `${building.height * 0.72}%`,
-              animationDelay: `${building.delay}s`,
-            } as CSSProperties}
-          />
-        ))}
-      </div>
-      <div className="skyline skyline-front">
-        {skyline.map((building, index) => (
-          <span
-            className="building"
-            key={`front-${index}`}
-            style={{
-              left: `${(building.left + 2) % 100}%`,
-              width: `${building.width + 1}%`,
-              height: `${building.height}%`,
-              animationDelay: `${building.delay + 0.12}s`,
-            } as CSSProperties}
-          />
-        ))}
-      </div>
-      <div className="tower tower-left"><span /></div>
-      <div className="tower tower-right"><span /></div>
-      <div className="sky-rail sky-rail-back" />
-      <div className="sky-rail sky-rail-front" />
-      <div className="walkway" />
-      <div className="hero-silhouette"><span /></div>
-      <div className="city-caption">MAKATI / 01:42 AM</div>
-    </div>
-  );
+  return <div className="city-scene" aria-hidden="true" />;
 }
 
 export default function App() {
