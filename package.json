@@ -10,8 +10,7 @@
     "format": "oxfmt"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "preact": "^10.27.2"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
