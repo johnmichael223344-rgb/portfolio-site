@@ -41,6 +41,13 @@ const certificates: {
     year: "2026",
   },
   {
+    title: "InfoTechnOlympics 2026: The Tech Odyssey",
+    category: "technology",
+    description: "Recognition for active participation in the University of Makati InfoTechnOlympics 2026, showcasing skills and knowledge in modern technologies.",
+    file: "infotechnolympics-tech-odyssey-2026.pdf",
+    year: "2026",
+  },
+  {
     title: "CCIS Student Leadership Team Building",
     category: "non_developer",
     description: "Recognition for service and contribution as a participant in the 2025 CCIS Student Leadership Team Building.",
