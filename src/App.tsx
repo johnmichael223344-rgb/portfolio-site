@@ -454,7 +454,7 @@ export default function App() {
               onClick={() => moveCertificate(-1)}
               aria-label="Previous certificate"
             >
-              <span aria-hidden="true">←</span> PREVIOUS
+              <span aria-hidden="true">←</span>
             </button>
             <div
               className="certificate-carousel-progress"
@@ -472,7 +472,7 @@ export default function App() {
               onClick={() => moveCertificate(1)}
               aria-label="Next certificate"
             >
-              NEXT <span aria-hidden="true">→</span>
+              <span aria-hidden="true">→</span>
             </button>
           </div>
         </section>
