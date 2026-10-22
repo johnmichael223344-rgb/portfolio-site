@@ -1,132 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
-
-type ProjectCategory = "hackathon" | "nc_iii" | "capstone";
-type CertificateCategory = "all" | "design" | "technology" | "non_developer";
-
-const certificateCategoryLabels: Record<CertificateCategory, string> = {
-  all: "All",
-  design: "Design & Creative",
-  technology: "Technology",
-  non_developer: "Non-developer",
-};
-
-const certificates: {
-  title: string;
-  category: Exclude<CertificateCategory, "all">;
-  description: string;
-  file: string;
-  year: string;
-}[] = [
-  {
-    title: "National Certificate III — Visual Graphic Design",
-    category: "design",
-    description: "Professional competency in visual graphic design, including design foundations, layout development, visual asset creation, and digital production.",
-    file: "nc-iii-visual-graphic-design-unlocked.pdf",
-    year: "NC III",
-  },
-  {
-    title: "InfoTechnOlympics 2025 — Web Design",
-    category: "design",
-    description: "Participant in the Web Design category at the University of Makati's InfoTechnOlympics 2025.",
-    file: "infotechnolympics-web-design-2025.pdf",
-    year: "2025",
-  },
-  {
-    title: "AI Tech 2.0",
-    category: "technology",
-    description: "Participation certificate for AI Tech 2.0, themed “Think. Code. Evolve: The Future of AI Starts Here.”",
-    file: "ai-tech-2-0-participant.pdf",
-    year: "2026",
-  },
-  {
-    title: "InfoTechnOlympics 2026: The Tech Odyssey",
-    category: "technology",
-    description: "Recognition for active participation in the University of Makati InfoTechnOlympics 2026, showcasing skills and knowledge in modern technologies.",
-    file: "infotechnolympics-tech-odyssey-2026.pdf",
-    year: "2026",
-  },
-  {
-    title: "CCIS Student Leadership Team Building",
-    category: "non_developer",
-    description: "Recognition for service and contribution as a participant in the 2025 CCIS Student Leadership Team Building.",
-    file: "ccis-leadership-team-building-2025.pdf",
-    year: "2025",
-  },
-  {
-    title: "CCIS General Assembly",
-    category: "non_developer",
-    description: "Certificate of appreciation for attending the 2025 CCIS General Assembly, themed “CCIS@25: Debugging the Future with Innovation, Collaboration, and Excellence.”",
-    file: "ccis-general-assembly-2025.pdf",
-    year: "2025",
-  },
-  {
-    title: "Film Showing on Escherian Stairwell",
-    category: "non_developer",
-    description: "Participation in the University of Makati film showing event held on October 30, 2025.",
-    file: "film-showing-escherian-stairwell-2025.pdf",
-    year: "2025",
-  },
-  {
-    title: "Mighty Magulang: Adventures in Ninuno-Hunting",
-    category: "non_developer",
-    description: "Participation in a CLAS magisterial lecture hosted by the Department of Social Sciences, Philosophy, and Humanities on September 19, 2025.",
-    file: "mighty-magulang-lecture-2025.pdf",
-    year: "2025",
-  },
-];
-
-const projects: Record<
-  ProjectCategory,
-  { title: string; type: string; description: string; status: string }[]
-> = {
-  hackathon: [
-    {
-      title: "Campus Connect",
-      type: "Product Design",
-      description:
-        "A student-first collaboration platform shaped during a 24-hour design sprint.",
-      status: "Case Study",
-    },
-    {
-      title: "SafeRoute",
-      type: "UI / UX",
-      description:
-        "A mobile concept that helps commuters share and discover safer city routes.",
-      status: "Prototype",
-    },
-  ],
-  nc_iii: [
-    {
-      title: "Identity System",
-      type: "Brand Design",
-      description:
-        "A complete visual identity exercise covering marks, type, color, and applications.",
-      status: "Coursework",
-    },
-    {
-      title: "Campaign Toolkit",
-      type: "Graphic Design",
-      description:
-        "A coordinated set of social, print, and digital campaign materials.",
-      status: "Coursework",
-    },
-  ],
-  capstone: [
-    {
-      title: "Application Project",
-      type: "Capstone",
-      description:
-        "An application development project combining user research, interface design, and code.",
-      status: "In Progress",
-    },
-  ],
-};
-
-const categoryLabels: Record<ProjectCategory, string> = {
-  hackathon: "Hackathon",
-  nc_iii: "NC III",
-  capstone: "Capstone",
-};
+import { useEffect, useRef, useState, type ComponentType, type ReactNode } from "react";
 
 const bibleVerses = [
   { quote: "I CAN DO ALL THINGS", reference: "PHILIPPIANS 4:13" },
@@ -144,28 +16,63 @@ function Cityscape() {
   return <div className="city-scene" aria-hidden="true" />;
 }
 
-export default function App() {
-  const [activeProject, setActiveProject] =
-    useState<ProjectCategory>("hackathon");
-  const [activeCertificateCategory, setActiveCertificateCategory] =
-    useState<CertificateCategory>("all");
-  const [activeCertificateIndex, setActiveCertificateIndex] = useState(0);
-  const [certificateDirection, setCertificateDirection] =
-    useState<"next" | "previous">("next");
-  const visibleCertificates = certificates.filter(
-    (certificate) =>
-      activeCertificateCategory === "all" ||
-      certificate.category === activeCertificateCategory,
+type DeferredSectionKind = "certificates" | "projects";
+
+const sectionLoaders = {
+  certificates: () => import("./sections/CertificatesSection"),
+  projects: () => import("./sections/ProjectsSection"),
+};
+
+function DeferredSection({ id, kind }: { id: string; kind: DeferredSectionKind }) {
+  const host = useRef<HTMLDivElement>(null);
+  const [Section, setSection] = useState<ComponentType | null>(null);
+
+  useEffect(() => {
+    const element = host.current;
+    if (!element) return;
+
+    let cancelled = false;
+    let observer: IntersectionObserver | undefined;
+    const loadSection = () => {
+      void sectionLoaders[kind]().then(({ default: LoadedSection }) => {
+        if (!cancelled) setSection(() => LoadedSection);
+      });
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      loadSection();
+      return () => { cancelled = true; };
+    }
+
+    observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        observer?.disconnect();
+        loadSection();
+      }
+    }, { rootMargin: "240px 0px" });
+    observer.observe(element);
+
+    return () => {
+      cancelled = true;
+      observer?.disconnect();
+    };
+  }, [kind]);
+
+  const placeholderHeight = kind === "certificates" ? "520px" : "620px";
+  return (
+    <div
+      id={id}
+      ref={host}
+      style={{ minHeight: Section ? undefined : placeholderHeight }}
+      aria-busy={!Section}
+    >
+      {Section ? <Section /> : <div aria-hidden="true" />}
+    </div>
   );
-  const activeCertificate = visibleCertificates[activeCertificateIndex] ?? visibleCertificates[0];
-  const certificateCount = visibleCertificates.length;
-  const moveCertificate = (direction: number) => {
-    setCertificateDirection(direction > 0 ? "next" : "previous");
-    setActiveCertificateIndex(
-      (index) => (index + direction + visibleCertificates.length) % visibleCertificates.length,
-    );
-  };
-  const [verse] = useState(() => bibleVerses[Math.floor(Math.random() * bibleVerses.length)]);
+}
+
+
+export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === "undefined") return true;
     return window.localStorage.getItem("portfolio-theme") !== "light";
@@ -296,125 +203,8 @@ export default function App() {
           </div>
         </section>
 
-        <section className="wrap section" id="certificate">
-          <SectionLabel>02 / Certificates</SectionLabel>
-          <p className="certificate-intro">
-            A collection of credentials and experiences across design, technology, and campus life. Each item opens its original PDF.
-          </p>
-          <div className="certificate-filters" role="tablist" aria-label="Certificate category">
-            {(["all", "design", "technology", "non_developer"] as CertificateCategory[]).map((category) => (
-              <button
-                aria-selected={activeCertificateCategory === category}
-                id={`certificate-tab-${category}`}
-                key={category}
-                onClick={() => {
-                  setActiveCertificateCategory(category);
-                  setActiveCertificateIndex(0);
-                  setCertificateDirection("next");
-                }}
-                role="tab"
-                type="button"
-              >
-                {certificateCategoryLabels[category]}
-              </button>
-            ))}
-          </div>
-                    <div className={`certificate-carousel-stage slide-${certificateDirection}`}>
-            <div
-              className="certificate-carousel"
-              role="tabpanel"
-              aria-labelledby={`certificate-tab-${activeCertificateCategory}`}
-              aria-live="polite"
-            >
-              {activeCertificate && (
-                <article className="certificate-entry certificate-current card" key={`${activeCertificateCategory}-${activeCertificate.file}`}>
-                  <div className="certificate-entry-meta">
-                    <span>{certificateCategoryLabels[activeCertificate.category]}</span>
-                    <span>{activeCertificate.year}</span>
-                  </div>
-                  <h2>{activeCertificate.title}</h2>
-                  <p>{activeCertificate.description}</p>
-                  <a
-                    className="certificate-link"
-                    href={`${import.meta.env.BASE_URL}certificates/${activeCertificate.file}`}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    OPEN CERTIFICATE PDF <span aria-hidden="true">↗</span>
-                  </a>
-                </article>
-              )}
-            </div>
-            <div className="certificate-carousel-controls" aria-label="Certificate carousel controls">
-              <button
-                type="button"
-                onClick={() => moveCertificate(-1)}
-                aria-label="Previous certificate"
-              >
-                <span aria-hidden="true">←</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => moveCertificate(1)}
-                aria-label="Next certificate"
-              >
-                <span aria-hidden="true">→</span>
-              </button>
-            </div>
-          </div>
-          <div className="certificate-carousel-nav" role="group" aria-label="Choose certificate">
-            {visibleCertificates.map((certificate, index) => (
-              <button
-                key={certificate.file}
-                type="button"
-                aria-label={`Show certificate ${index + 1}: ${certificate.title}`}
-                aria-pressed={index === activeCertificateIndex}
-                className={index === activeCertificateIndex ? "active" : ""}
-                onClick={() => {
-                  setCertificateDirection(index >= activeCertificateIndex ? "next" : "previous");
-                  setActiveCertificateIndex(index);
-                }}
-              />
-            ))}
-          </div>
-        </section>
-
-        <section className="wrap section" id="projects">
-          <SectionLabel>03 / Selected Projects</SectionLabel>
-          <div className="project-tabs" role="tablist" aria-label="Project category">
-            {(["hackathon", "nc_iii", "capstone"] as ProjectCategory[]).map(
-              (category) => (
-                <button
-                  aria-selected={activeProject === category}
-                  id={`tab-${category}`}
-                  key={category}
-                  onClick={() => setActiveProject(category)}
-                  role="tab"
-                  type="button"
-                >
-                  <span aria-hidden="true">▸</span> {categoryLabels[category]}
-                </button>
-              ),
-            )}
-          </div>
-          <div className="project-grid" role="tabpanel" aria-labelledby={`tab-${activeProject}`}>
-            {projects[activeProject].map((project, index) => (
-              <article className="project-card card" key={project.title}>
-                <div className="project-head">
-                  <span className="project-num">FILE_{String(index + 1).padStart(2, "0")}</span>
-                  <span className="project-status"><i /> {project.status}</span>
-                </div>
-                <div className={`project-visual v-${index + 1}`} aria-hidden="true">
-                  <span /><span /><span /><b /><i />
-                </div>
-                <span className="project-type">{project.type}</span>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <span className="project-link">CASE FILE <span aria-hidden="true">↗</span></span>
-              </article>
-            ))}
-          </div>
-        </section>
+        <DeferredSection id="certificate" kind="certificates" />
+        <DeferredSection id="projects" kind="projects" />
 
         <section className="wrap contact-section" id="contact">
           <div className="contact-card card">
