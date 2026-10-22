@@ -434,7 +434,7 @@ export default function App() {
               </a>
               <a
                 className="btn btn-accent"
-                href="https://github.com/johnmichael223344-rgb"
+                href="https://github.com/kerusan1"
                 rel="noreferrer"
                 target="_blank"
               >
