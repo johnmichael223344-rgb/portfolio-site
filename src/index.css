@@ -865,3 +865,18 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 }
 .certificate-description-toggle:hover { color: var(--pink); }
 .certificate-description-toggle:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+
+
+/* Keep certificate cards level as descriptions and slides change. */
+.certificate-carousel,
+.certificate-carousel-stage {
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.certificate-entry {
+  height: 100%;
+}
+@media (max-width: 620px) {
+  .certificate-carousel { grid-template-rows: 1fr; }
+  .certificate-entry { height: 100%; }
+}
