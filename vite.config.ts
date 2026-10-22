@@ -28,6 +28,11 @@ react(),
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
+        'react-dom/test-utils': 'preact/test-utils',
+        'react-dom/client': 'preact/compat',
+        'react-dom': 'preact/compat',
+        'react/jsx-runtime': 'preact/jsx-runtime',
+        'react': 'preact/compat',
       },
     },
     server: {
