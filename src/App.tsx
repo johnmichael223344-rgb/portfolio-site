@@ -172,17 +172,16 @@ export default function App() {
             <div className="hero-copy">
               <div className="hero-availability">
                 <span className="status-dot" />
-                <span>AVAILABLE FOR CREATIVE WORK</span>
+                <span>OPEN TO SELECT OPPORTUNITIES</span>
               </div>
-              <p className="hero-kicker">VISUAL DESIGNER <i /> APP DEVELOPER</p>
+              <p className="hero-kicker">VISUAL DESIGN <i /> APPLICATION DEVELOPMENT</p>
               <h1>
                 JOHN MICHAEL
                 <br />
                 <em>O. BAUTISTA</em>
               </h1>
               <p className="hero-role">
-                I design bright ideas and build digital experiences with
-                character. Based in Manila, creating one pixel at a time.
+                Visual designer and application developer based in Manila. I create clear, considered digital experiences and visual identities.
               </p>
               <div className="hero-tags">
                 <span>VISUAL DESIGN</span>
@@ -309,14 +308,14 @@ export default function App() {
           <div className="contact-card card">
             <div className="contact-spark" aria-hidden="true">✳</div>
             <p className="micro-label">HAVE A GOOD IDEA?</p>
-            <h2>Let&apos;s build something that glows.</h2>
+            <h2>Let&apos;s discuss your next project.</h2>
             <p>
               Open to creative opportunities, project collaborations, and a
               friendly hello.
             </p>
             <div className="contact-actions">
               <a className="btn btn-primary" href="mailto:johnmichael223344@gmail.com">
-                SEND A SIGNAL <span aria-hidden="true">↗</span>
+                GET IN TOUCH <span aria-hidden="true">↗</span>
               </a>
               <a
                 className="btn btn-accent"
