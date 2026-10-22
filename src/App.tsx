@@ -55,6 +55,14 @@ const categoryLabels: Record<ProjectCategory, string> = {
   capstone: "Capstone",
 };
 
+const bibleVerses = [
+  { quote: "I CAN DO ALL THINGS", reference: "PHILIPPIANS 4:13" },
+  { quote: "BE STRONG AND COURAGEOUS", reference: "JOSHUA 1:9" },
+  { quote: "TRUST IN THE LORD", reference: "PROVERBS 3:5" },
+  { quote: "LET ALL YOU DO BE DONE IN LOVE", reference: "1 CORINTHIANS 16:14" },
+  { quote: "THE LORD IS MY SHEPHERD", reference: "PSALM 23:1" },
+];
+
 const skyline = Array.from({ length: 24 }, (_, index) => ({
   left: (index / 24) * 100,
   width: 3 + ((index * 7) % 5),
@@ -69,6 +77,7 @@ function SectionLabel({ children }: { children: ReactNode }) {
 function Cityscape() {
   return (
     <div className="city-scene" aria-hidden="true">
+      <img className="city-background" src={`${import.meta.env.BASE_URL}images/neon-pixel-boulevard-stockcake.jpg`} alt="" />
       <div className="city-scanlines" />
       <div className="planet-orbit">
         <span className="planet" />
@@ -118,6 +127,7 @@ function Cityscape() {
 export default function App() {
   const [activeProject, setActiveProject] =
     useState<ProjectCategory>("hackathon");
+  const [verse] = useState(() => bibleVerses[Math.floor(Math.random() * bibleVerses.length)]);
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === "undefined") return true;
     return window.localStorage.getItem("portfolio-theme") !== "light";
@@ -198,10 +208,10 @@ export default function App() {
               </div>
             </div>
             <div className="hero-index" aria-hidden="true">
-              <span>&ldquo;I CAN DO ALL THINGS&rdquo;</span>
+              <span>&ldquo;{verse.quote}&rdquo;</span>
               <strong>1009</strong>
               <i />
-              <span>PHILIPPIANS 4:13</span>
+              <span>{verse.reference}</span>
             </div>
           </div>
           <a className="scroll-cue" href="#about">
