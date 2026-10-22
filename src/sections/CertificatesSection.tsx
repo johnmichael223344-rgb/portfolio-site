@@ -74,6 +74,8 @@ const certificates: {
   },
 ];
 
+const DESCRIPTION_PREVIEW_LENGTH = 110;
+
 function SectionLabel({ children }: { children: string }) {
   return <h2 className="section-label">{children}</h2>;
 }
@@ -82,6 +84,7 @@ export default function CertificatesSection() {
   const [activeCategory, setActiveCategory] = useState<CertificateCategory>("all");
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<"next" | "previous">("next");
+  const [expandedDescription, setExpandedDescription] = useState<string | null>(null);
   const visibleCertificates = certificates.filter(
     (certificate) => activeCategory === "all" || certificate.category === activeCategory,
   );
@@ -90,6 +93,8 @@ export default function CertificatesSection() {
     setDirection(step > 0 ? "next" : "previous");
     setActiveIndex((index) => (index + step + visibleCertificates.length) % visibleCertificates.length);
   };
+  const descriptionIsLong = (activeCertificate?.description.length ?? 0) > DESCRIPTION_PREVIEW_LENGTH;
+  const descriptionIsExpanded = activeCertificate?.file === expandedDescription;
 
   return (
     <section className="wrap section">
@@ -129,7 +134,26 @@ export default function CertificatesSection() {
                 <span>{activeCertificate.year}</span>
               </div>
               <h2>{activeCertificate.title}</h2>
-              <p>{activeCertificate.description}</p>
+              <p>
+                {descriptionIsLong && !descriptionIsExpanded
+                  ? `${activeCertificate.description.slice(0, DESCRIPTION_PREVIEW_LENGTH).trimEnd()}…`
+                  : activeCertificate.description}
+                {descriptionIsLong && (
+                  <>
+                    {" "}
+                    <button
+                      className="certificate-description-toggle"
+                      type="button"
+                      aria-expanded={descriptionIsExpanded}
+                      onClick={() =>
+                        setExpandedDescription(descriptionIsExpanded ? null : activeCertificate.file)
+                      }
+                    >
+                      {descriptionIsExpanded ? "See less..." : "See more..."}
+                    </button>
+                  </>
+                )}
+              </p>
               <a
                 className="certificate-link"
                 href={`${import.meta.env.BASE_URL}certificates/${activeCertificate.file}`}
