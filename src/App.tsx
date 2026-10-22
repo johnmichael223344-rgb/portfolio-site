@@ -222,10 +222,6 @@ export default function App() {
   );
   const activeCertificate = visibleCertificates[activeCertificateIndex] ?? visibleCertificates[0];
   const certificateCount = visibleCertificates.length;
-  const previousCertificate =
-    visibleCertificates[(activeCertificateIndex - 1 + certificateCount) % certificateCount];
-  const nextCertificate =
-    visibleCertificates[(activeCertificateIndex + 1) % certificateCount];
   const moveCertificate = (direction: number) => {
     setCertificateDirection(direction > 0 ? "next" : "previous");
     setActiveCertificateIndex(
@@ -383,26 +379,6 @@ export default function App() {
             ))}
           </div>
                     <div className={`certificate-carousel-stage slide-${certificateDirection}`}>
-
-            {previousCertificate && (
-              <article
-                key={`previous-${previousCertificate.file}`}
-                className="certificate-side-card card"
-                role="button"
-                tabIndex={0}
-                aria-label={`Show certificate: ${previousCertificate.title}`}
-                onClick={() => moveCertificate(-1)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    moveCertificate(-1);
-                  }
-                }}
-              >
-                <span>{certificateCategoryLabels[previousCertificate.category]}</span>
-                <h3>{previousCertificate.title}</h3>
-              </article>
-            )}
             <div
               className="certificate-carousel"
               role="tabpanel"
@@ -428,52 +404,37 @@ export default function App() {
                 </article>
               )}
             </div>
-            {nextCertificate && (
-              <article
-                key={`next-${nextCertificate.file}`}
-                className="certificate-side-card card"
-                role="button"
-                tabIndex={0}
-                aria-label={`Show certificate: ${nextCertificate.title}`}
-                onClick={() => moveCertificate(1)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    moveCertificate(1);
-                  }
-                }}
+            <div className="certificate-carousel-controls" aria-label="Certificate carousel controls">
+              <button
+                type="button"
+                onClick={() => moveCertificate(-1)}
+                aria-label="Previous certificate"
               >
-                <span>{certificateCategoryLabels[nextCertificate.category]}</span>
-                <h3>{nextCertificate.title}</h3>
-              </article>
-            )}
-          </div>
-          <div className="certificate-carousel-nav" aria-label="Certificate carousel controls">
-            <button
-              type="button"
-              onClick={() => moveCertificate(-1)}
-              aria-label="Previous certificate"
-            >
-              <span aria-hidden="true">←</span>
-            </button>
-            <div
-              className="certificate-carousel-progress"
-              role="progressbar"
-              aria-label="Certificate carousel position"
-              aria-valuemin={1}
-              aria-valuemax={certificateCount}
-              aria-valuenow={activeCertificateIndex + 1}
-              aria-valuetext={`Certificate ${activeCertificateIndex + 1} of ${certificateCount}`}
-            >
-              <span style={{ width: `${((activeCertificateIndex + 1) / certificateCount) * 100}%` }} />
+                <span aria-hidden="true">←</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => moveCertificate(1)}
+                aria-label="Next certificate"
+              >
+                <span aria-hidden="true">→</span>
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={() => moveCertificate(1)}
-              aria-label="Next certificate"
-            >
-              <span aria-hidden="true">→</span>
-            </button>
+          </div>
+          <div className="certificate-carousel-nav" role="group" aria-label="Choose certificate">
+            {visibleCertificates.map((certificate, index) => (
+              <button
+                key={certificate.file}
+                type="button"
+                aria-label={`Show certificate ${index + 1}: ${certificate.title}`}
+                aria-pressed={index === activeCertificateIndex}
+                className={index === activeCertificateIndex ? "active" : ""}
+                onClick={() => {
+                  setCertificateDirection(index >= activeCertificateIndex ? "next" : "previous");
+                  setActiveCertificateIndex(index);
+                }}
+              />
+            ))}
           </div>
         </section>
 
