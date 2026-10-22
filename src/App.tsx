@@ -73,6 +73,7 @@ function DeferredSection({ id, kind }: { id: string; kind: DeferredSectionKind }
 
 
 export default function App() {
+  const [verse] = useState(() => bibleVerses[Math.floor(Math.random() * bibleVerses.length)]);
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === "undefined") return true;
     return window.localStorage.getItem("portfolio-theme") !== "light";
