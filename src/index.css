@@ -947,3 +947,13 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
     background: transparent;
   }
 }
+
+
+/* Match desktop dark blur on the mobile #top hero. */
+@media (max-width: 620px) {
+  .hero::after {
+    background: rgba(0, 0, 0, .68);
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
+  }
+}
