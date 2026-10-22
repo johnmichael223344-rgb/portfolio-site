@@ -1,6 +1,74 @@
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 
 type ProjectCategory = "hackathon" | "nc_iii" | "capstone";
+type CertificateCategory = "all" | "design" | "technology" | "non_developer";
+
+const certificateCategoryLabels: Record<CertificateCategory, string> = {
+  all: "All",
+  design: "Design & Creative",
+  technology: "Technology",
+  non_developer: "Non-developer",
+};
+
+const certificates: {
+  title: string;
+  category: Exclude<CertificateCategory, "all">;
+  description: string;
+  file: string;
+  year: string;
+  passwordProtected?: boolean;
+}[] = [
+  {
+    title: "National Certificate III — Visual Graphic Design",
+    category: "design",
+    description: "Professional competency in visual graphic design, including design foundations, layout development, visual asset creation, and digital production.",
+    file: "nc-iii-visual-graphic-design.pdf",
+    year: "NC III",
+    passwordProtected: true,
+  },
+  {
+    title: "InfoTechnOlympics 2025 — Web Design",
+    category: "design",
+    description: "Participant in the Web Design category at the University of Makati's InfoTechnOlympics 2025.",
+    file: "infotechnolympics-web-design-2025.pdf",
+    year: "2025",
+  },
+  {
+    title: "AI Tech 2.0",
+    category: "technology",
+    description: "Participation certificate for AI Tech 2.0, themed “Think. Code. Evolve: The Future of AI Starts Here.”",
+    file: "ai-tech-2-0-participant.pdf",
+    year: "2026",
+  },
+  {
+    title: "CCIS Student Leadership Team Building",
+    category: "non_developer",
+    description: "Recognition for service and contribution as a participant in the 2025 CCIS Student Leadership Team Building.",
+    file: "ccis-leadership-team-building-2025.pdf",
+    year: "2025",
+  },
+  {
+    title: "CCIS General Assembly",
+    category: "non_developer",
+    description: "Certificate of appreciation for attending the 2025 CCIS General Assembly, themed “CCIS@25: Debugging the Future with Innovation, Collaboration, and Excellence.”",
+    file: "ccis-general-assembly-2025.pdf",
+    year: "2025",
+  },
+  {
+    title: "Film Showing on Escherian Stairwell",
+    category: "non_developer",
+    description: "Participation in the University of Makati film showing event held on October 30, 2025.",
+    file: "film-showing-escherian-stairwell-2025.pdf",
+    year: "2025",
+  },
+  {
+    title: "Mighty Magulang: Adventures in Ninuno-Hunting",
+    category: "non_developer",
+    description: "Participation in a CLAS magisterial lecture hosted by the Department of Social Sciences, Philosophy, and Humanities on September 19, 2025.",
+    file: "mighty-magulang-lecture-2025.pdf",
+    year: "2025",
+  },
+];
 
 const projects: Record<
   ProjectCategory,
@@ -137,6 +205,8 @@ function Cityscape() {
 export default function App() {
   const [activeProject, setActiveProject] =
     useState<ProjectCategory>("hackathon");
+  const [activeCertificateCategory, setActiveCertificateCategory] =
+    useState<CertificateCategory>("all");
   const [verse] = useState(() => bibleVerses[Math.floor(Math.random() * bibleVerses.length)]);
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === "undefined") return true;
@@ -161,7 +231,7 @@ export default function App() {
           </a>
           <nav aria-label="Main navigation">
             <a href="#about">About</a>
-            <a href="#certificate">Certificate</a>
+            <a href="#certificate">Certificates</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
           </nav>
@@ -265,27 +335,49 @@ export default function App() {
         </section>
 
         <section className="wrap section" id="certificate">
-          <SectionLabel>02 / Certificate</SectionLabel>
-          <article className="certificate-card card">
-            <div className="cert-badge" aria-hidden="true">
-              <span className="cert-star">★</span>
-              <small>VERIFIED</small>
-            </div>
-            <div className="cert-body">
-              <span className="cert-type">PROFESSIONAL CREDENTIAL</span>
-              <h2>National Certificate III — Visual Graphic Design</h2>
-              <p>
-                Certified competency in visual graphic design, including design
-                fundamentals, layout development, visual asset creation, and
-                digital production workflows.
-              </p>
-              <div className="cert-tags">
-                <span>NC III</span>
-                <span>VISUAL GRAPHIC DESIGN</span>
-                <span>CREDENTIAL EARNED</span>
-              </div>
-            </div>
-          </article>
+          <SectionLabel>02 / Certificates</SectionLabel>
+          <p className="certificate-intro">
+            A collection of credentials and experiences across design, technology, and campus life. Each item opens its original PDF.
+          </p>
+          <div className="certificate-filters" role="tablist" aria-label="Certificate category">
+            {(["all", "design", "technology", "non_developer"] as CertificateCategory[]).map((category) => (
+              <button
+                aria-selected={activeCertificateCategory === category}
+                id={`certificate-tab-${category}`}
+                key={category}
+                onClick={() => setActiveCertificateCategory(category)}
+                role="tab"
+                type="button"
+              >
+                {certificateCategoryLabels[category]}
+              </button>
+            ))}
+          </div>
+          <div className="certificate-grid" role="tabpanel" aria-labelledby={`certificate-tab-${activeCertificateCategory}`}>
+            {certificates
+              .filter((certificate) => activeCertificateCategory === "all" || certificate.category === activeCertificateCategory)
+              .map((certificate) => (
+                <article className="certificate-entry card" key={certificate.file}>
+                  <div className="certificate-entry-meta">
+                    <span>{certificateCategoryLabels[certificate.category]}</span>
+                    <span>{certificate.year}</span>
+                  </div>
+                  <h2>{certificate.title}</h2>
+                  <p>{certificate.description}</p>
+                  {certificate.passwordProtected && (
+                    <span className="certificate-protected">Source PDF is password-protected</span>
+                  )}
+                  <a
+                    className="certificate-link"
+                    href={`${import.meta.env.BASE_URL}certificates/${certificate.file}`}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    OPEN CERTIFICATE PDF <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
+              ))}
+          </div>
         </section>
 
         <section className="wrap section" id="projects">

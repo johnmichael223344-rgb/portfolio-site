@@ -602,3 +602,94 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   .hero-index-photo { width: 66px; }
   .hero-index > span { max-width: 130px; font-size: 6px; }
 }
+
+
+/* Certificate library */
+.certificate-intro {
+  max-width: 660px;
+  margin: -12px 0 22px;
+  color: var(--ink-soft);
+}
+.certificate-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.certificate-filters button {
+  min-height: 40px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font: 10px "DM Mono", monospace;
+  letter-spacing: .04em;
+  padding: 0 14px;
+  cursor: pointer;
+}
+.certificate-filters button:hover,
+.certificate-filters button[aria-selected="true"] {
+  border-color: var(--cyan);
+  background: var(--surface-raised);
+  color: var(--cyan);
+}
+.certificate-grid {
+  display: grid;
+  align-items: stretch;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.certificate-entry {
+  display: flex;
+  min-height: 245px;
+  flex-direction: column;
+  padding: clamp(20px, 3vw, 28px);
+}
+.certificate-entry-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--ink-muted);
+  font: 9px "DM Mono", monospace;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.certificate-entry-meta span:first-child { color: var(--cyan); }
+.certificate-entry h2 {
+  margin: 18px 0 10px;
+  color: var(--ink);
+  font: 600 clamp(20px, 2.5vw, 26px)/1.25 "Space Grotesk", system-ui, sans-serif;
+  letter-spacing: -.025em;
+}
+.certificate-entry > p {
+  margin: 0 0 18px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.certificate-protected {
+  margin: -5px 0 14px;
+  color: var(--pink);
+  font: 9px "DM Mono", monospace;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.certificate-link {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 40px;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  border-bottom: 1px solid var(--border-strong);
+  color: var(--cyan);
+  font: 10px "DM Mono", monospace;
+  letter-spacing: .06em;
+  text-decoration: none;
+}
+.certificate-link:hover { color: var(--pink); border-color: var(--pink); }
+.certificate-link span { color: var(--pink); }
+@media (max-width: 620px) {
+  .certificate-grid { grid-template-columns: 1fr; }
+  .certificate-entry { min-height: 220px; }
+}
