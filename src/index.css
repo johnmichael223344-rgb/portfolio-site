@@ -752,13 +752,16 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   margin-top: 14px;
 }
 .certificate-carousel-nav button {
+  display: grid;
+  width: 40px;
   min-height: 40px;
+  place-items: center;
   border: 1px solid var(--border);
+  border-radius: 50%;
   background: var(--surface);
   color: var(--ink-soft);
-  font: 10px "DM Mono", monospace;
-  letter-spacing: .05em;
-  padding: 0 14px;
+  font: 16px "DM Mono", monospace;
+  padding: 0;
   cursor: pointer;
 }
 .certificate-carousel-nav button:hover {
@@ -850,5 +853,5 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   .certificate-side-card h3 { font-size: 12px; }
   .certificate-carousel { width: auto; grid-column: 2; }
   .certificate-entry { min-height: 220px; }
-  .certificate-carousel-nav button { min-height: 42px; padding-inline: 10px; }
+  .certificate-carousel-nav button { width: 42px; min-height: 42px; }
 }
