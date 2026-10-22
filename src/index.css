@@ -537,3 +537,37 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   .walkway { height: 29%; clip-path: polygon(46% 0,54% 0,100% 100%,0 100%); }
   .hero::after { background: linear-gradient(90deg, rgba(18,17,30,.74), rgba(18,17,30,.35) 66%, rgba(18,17,30,.08)); }
 }
+
+/* Use the supplied image as a temporary #top backdrop */
+.city-scene > :not(.city-background) { display: none; }
+.city-background {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.city-scene::before {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(14,13,27,.55) 0%, rgba(20,15,31,.26) 44%, rgba(20,15,31,.05) 76%),
+    linear-gradient(0deg, rgba(13,14,25,.25), transparent 42%);
+  mask-image: none;
+  opacity: 1;
+}
+.city-scene::after {
+  z-index: 2;
+  background: repeating-linear-gradient(0deg, transparent 0 5px, rgba(255,225,209,.025) 5px 6px);
+}
+.city-scanlines { display: none; }
+@media (max-width: 620px) {
+  .city-background { object-position: center center; }
+  .city-scene::before {
+    background:
+      linear-gradient(90deg, rgba(14,13,27,.68), rgba(20,15,31,.36) 66%, rgba(20,15,31,.12)),
+      linear-gradient(0deg, rgba(13,14,25,.24), transparent 48%);
+  }
+}
