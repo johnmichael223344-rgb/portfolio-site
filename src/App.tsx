@@ -294,10 +294,10 @@ export default function App() {
             </div>
             <div className="hero-index">
               <img className="hero-index-photo" src={`${import.meta.env.BASE_URL}images/temporary-profile.jpg`} alt="Temporary profile picture of John Michael" />
-              <span>&ldquo;{verse.quote}&rdquo;</span>
-              <strong>1009</strong>
-              <i />
-              <span>{verse.reference}</span>
+              <div className="hero-verse">
+                <span>&ldquo;{verse.quote}&rdquo;</span>
+                <span>{verse.reference}</span>
+              </div>
             </div>
           </div>
           <a className="scroll-cue" href="#about">
