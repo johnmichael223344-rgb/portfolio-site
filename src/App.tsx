@@ -150,19 +150,19 @@ function SectionLabel({ children }: { children: ReactNode }) {
 function Cityscape() {
   return (
     <div className="city-scene" aria-hidden="true">
-      <img
-        className="city-background"
-        fetchPriority="high"
-        decoding="async"
-        src={`${import.meta.env.BASE_URL}images/neon-pixel-boulevard.webp`}
-        alt=""
-        onError={(event) => {
-          const fallback = "/images/neon-pixel-boulevard.webp";
-          if (!event.currentTarget.src.endsWith(fallback)) {
-            event.currentTarget.src = fallback;
-          }
-        }}
-      />
+      <picture className="city-background-picture">
+        <source
+          type="image/avif"
+          srcSet={`${import.meta.env.BASE_URL}images/neon-pixel-boulevard.avif`}
+        />
+        <img
+          className="city-background"
+          fetchPriority="high"
+          decoding="async"
+          src={`${import.meta.env.BASE_URL}images/neon-pixel-boulevard.webp`}
+          alt=""
+        />
+      </picture>
       <div className="city-scanlines" />
       <div className="planet-orbit">
         <span className="planet" />
@@ -311,7 +311,13 @@ export default function App() {
               </div>
             </div>
             <div className="hero-index">
-              <img className="hero-index-photo" src={`${import.meta.env.BASE_URL}images/temporary-profile.webp`} alt="Temporary profile picture of John Michael" />
+              <img
+                className="hero-index-photo"
+                src={`${import.meta.env.BASE_URL}images/temporary-profile.webp`}
+                srcSet={`${import.meta.env.BASE_URL}images/temporary-profile-128.webp 128w, ${import.meta.env.BASE_URL}images/temporary-profile-320.webp 320w`}
+                sizes="(max-width: 620px) 68px, 156px"
+                alt="Temporary profile picture of John Michael"
+              />
               <div className="hero-verse">
                 <span>&ldquo;{verse.quote}&rdquo;</span>
                 <span>{verse.reference}</span>
