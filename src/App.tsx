@@ -77,7 +77,17 @@ function SectionLabel({ children }: { children: ReactNode }) {
 function Cityscape() {
   return (
     <div className="city-scene" aria-hidden="true">
-      <img className="city-background" src={`${import.meta.env.BASE_URL}images/neon-pixel-boulevard-stockcake.jpg`} alt="" />
+      <img
+        className="city-background"
+        src={`${import.meta.env.BASE_URL}images/neon-pixel-boulevard-stockcake.jpg`}
+        alt=""
+        onError={(event) => {
+          const fallback = "/images/neon-pixel-boulevard-stockcake.jpg";
+          if (!event.currentTarget.src.endsWith(fallback)) {
+            event.currentTarget.src = fallback;
+          }
+        }}
+      />
       <div className="city-scanlines" />
       <div className="planet-orbit">
         <span className="planet" />
