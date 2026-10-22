@@ -869,8 +869,8 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 
 /* Fix every certificate slide to the same card height. */
 .certificate-entry {
-  height: 300px;
-  min-height: 300px;
+  height: 260px;
+  min-height: 260px;
 }
 .certificate-entry > p {
   flex: 1 1 auto;
@@ -879,7 +879,7 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 }
 @media (max-width: 620px) {
   .certificate-entry {
-    height: 300px;
-    min-height: 300px;
+    height: 260px;
+    min-height: 260px;
   }
 }
