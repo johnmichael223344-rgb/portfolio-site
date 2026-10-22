@@ -867,16 +867,19 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 .certificate-description-toggle:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
 
 
-/* Give every certificate card the same footprint across slides. */
-.certificate-carousel,
-.certificate-carousel-stage {
-  display: block;
-}
+/* Fix every certificate slide to the same card height. */
 .certificate-entry {
-  min-height: 280px;
+  height: 300px;
+  min-height: 300px;
+}
+.certificate-entry > p {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 @media (max-width: 620px) {
   .certificate-entry {
-    min-height: 290px;
+    height: 300px;
+    min-height: 300px;
   }
 }
