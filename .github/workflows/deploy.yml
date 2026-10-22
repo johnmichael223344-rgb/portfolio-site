@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 22
       - run: npm install
-      - run: npm run build
+      - run: FIGMA_PUBLIC_URL=/portfolio-site npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
