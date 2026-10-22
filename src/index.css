@@ -851,3 +851,16 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
     height: 38px;
   }
 }
+
+
+.certificate-description-toggle {
+  border: 0;
+  background: transparent;
+  color: var(--cyan);
+  font: inherit;
+  font-weight: 700;
+  padding: 0;
+  cursor: pointer;
+}
+.certificate-description-toggle:hover { color: var(--pink); }
+.certificate-description-toggle:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
