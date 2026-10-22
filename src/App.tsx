@@ -16,15 +16,13 @@ const certificates: {
   description: string;
   file: string;
   year: string;
-  passwordProtected?: boolean;
 }[] = [
   {
     title: "National Certificate III — Visual Graphic Design",
     category: "design",
     description: "Professional competency in visual graphic design, including design foundations, layout development, visual asset creation, and digital production.",
-    file: "nc-iii-visual-graphic-design.pdf",
+    file: "nc-iii-visual-graphic-design-unlocked.pdf",
     year: "NC III",
-    passwordProtected: true,
   },
   {
     title: "InfoTechnOlympics 2025 — Web Design",
@@ -371,9 +369,6 @@ export default function App() {
                   </div>
                   <h2>{certificate.title}</h2>
                   <p>{certificate.description}</p>
-                  {certificate.passwordProtected && (
-                    <span className="certificate-protected">Source PDF is password-protected</span>
-                  )}
                   <a
                     className="certificate-link"
                     href={`${import.meta.env.BASE_URL}certificates/${certificate.file}`}
