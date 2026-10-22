@@ -817,3 +817,13 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   font-weight: 500;
   letter-spacing: .04em;
 }
+
+
+.certificate-control-label { display: inline; }
+.certificate-control-arrow { display: none; }
+
+@media (max-width: 620px) {
+  .certificate-control-label { display: none; }
+  .certificate-control-arrow { display: inline; }
+  .certificate-carousel-controls button { font-size: 16px; }
+}
