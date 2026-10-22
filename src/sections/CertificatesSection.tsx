@@ -143,10 +143,12 @@ export default function CertificatesSection() {
         </div>
         <div className="certificate-carousel-controls" aria-label="Certificate carousel controls">
           <button type="button" onClick={() => moveCertificate(-1)} aria-label="Previous certificate">
-            PREV
+            <span className="certificate-control-label">PREV</span>
+            <span className="certificate-control-arrow" aria-hidden="true">←</span>
           </button>
           <button type="button" onClick={() => moveCertificate(1)} aria-label="Next certificate">
-            NEXT
+            <span className="certificate-control-label">NEXT</span>
+            <span className="certificate-control-arrow" aria-hidden="true">→</span>
           </button>
         </div>
       </div>
