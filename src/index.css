@@ -537,46 +537,35 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   .hero::after { background: linear-gradient(90deg, rgba(18,17,30,.74), rgba(18,17,30,.35) 66%, rgba(18,17,30,.08)); }
 }
 
-/* Use the supplied image as a temporary #top backdrop */
-.city-scene > :not(.city-background):not(.city-background-picture) { display: none; }
-.city-background-picture {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  display: block;
-}
-.city-background {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
+/* Lightweight sunset gradient backdrop for the #top hero */
+.city-scene {
+  background:
+    radial-gradient(ellipse at 50% 44%, rgba(255, 177, 158, .5) 0%, rgba(215, 116, 137, .24) 24%, transparent 51%),
+    linear-gradient(180deg, #242541 0%, #514264 24%, #a65c78 42%, #e58b88 51%, #9a5d74 63%, #39324b 78%, #171722 100%);
 }
 .city-scene::before {
+  inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(14,13,27,.55) 0%, rgba(20,15,31,.26) 44%, rgba(20,15,31,.05) 76%),
-    linear-gradient(0deg, rgba(13,14,25,.25), transparent 42%);
-  mask-image: none;
-  opacity: 1;
+    linear-gradient(180deg, transparent 0 34%, rgba(255, 188, 164, .16) 34% 35%, transparent 35% 42%, rgba(255, 205, 174, .12) 42% 43%, transparent 43%),
+    repeating-linear-gradient(0deg, transparent 0 7px, rgba(255, 225, 211, .018) 7px 8px);
+  mask-image: linear-gradient(180deg, #000 0%, #000 53%, transparent 78%);
 }
 .city-scene::after {
   z-index: 2;
-  background: repeating-linear-gradient(0deg, transparent 0 5px, rgba(255,225,209,.025) 5px 6px);
+  background: linear-gradient(90deg, rgba(11, 11, 20, .34), rgba(11, 11, 20, .1) 55%, transparent 100%);
 }
-.city-scanlines { display: none; }
+.city-scene > * { display: none; }
 @media (max-width: 620px) {
-  .city-background { object-position: center center; }
-  .city-scene::before {
+  .city-scene {
     background:
-      linear-gradient(90deg, rgba(14,13,27,.68), rgba(20,15,31,.36) 66%, rgba(20,15,31,.12)),
-      linear-gradient(0deg, rgba(13,14,25,.24), transparent 48%);
+      radial-gradient(ellipse at 57% 44%, rgba(255, 177, 158, .42) 0%, rgba(215, 116, 137, .22) 25%, transparent 54%),
+      linear-gradient(180deg, #242541 0%, #514264 23%, #a65c78 42%, #e58b88 50%, #79516b 66%, #171722 100%);
+  }
+  .city-scene::after {
+    background: linear-gradient(90deg, rgba(11, 11, 20, .48), rgba(11, 11, 20, .18) 68%, rgba(11, 11, 20, .04));
   }
 }
-
 
 /* Temporary square profile picture in the hero */
 .hero-index-photo {
