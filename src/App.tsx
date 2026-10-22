@@ -385,7 +385,20 @@ export default function App() {
                     <div className={`certificate-carousel-stage slide-${certificateDirection}`}>
 
             {previousCertificate && (
-              <article key={`previous-${previousCertificate.file}`} className="certificate-side-card card" aria-hidden="true">
+              <article
+                key={`previous-${previousCertificate.file}`}
+                className="certificate-side-card card"
+                role="button"
+                tabIndex={0}
+                aria-label={`Show certificate: ${previousCertificate.title}`}
+                onClick={() => moveCertificate(-1)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    moveCertificate(-1);
+                  }
+                }}
+              >
                 <span>{certificateCategoryLabels[previousCertificate.category]}</span>
                 <h3>{previousCertificate.title}</h3>
               </article>
@@ -416,7 +429,20 @@ export default function App() {
               )}
             </div>
             {nextCertificate && (
-              <article key={`next-${nextCertificate.file}`} className="certificate-side-card card" aria-hidden="true">
+              <article
+                key={`next-${nextCertificate.file}`}
+                className="certificate-side-card card"
+                role="button"
+                tabIndex={0}
+                aria-label={`Show certificate: ${nextCertificate.title}`}
+                onClick={() => moveCertificate(1)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    moveCertificate(1);
+                  }
+                }}
+              >
                 <span>{certificateCategoryLabels[nextCertificate.category]}</span>
                 <h3>{nextCertificate.title}</h3>
               </article>
