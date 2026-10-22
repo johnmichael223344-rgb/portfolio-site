@@ -653,7 +653,7 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   opacity: .48;
   transform: scale(.92);
   transform-origin: center;
-  transition: opacity 380ms ease, transform 420ms cubic-bezier(.2,.75,.25,1);
+  transition: opacity 760ms ease, transform 820ms cubic-bezier(.2,.75,.25,1);
 }
 .slide-next .certificate-side-card:first-child { opacity: .34; transform: translateX(-12px) scale(.88); }
 .slide-next .certificate-side-card:last-child { opacity: .62; transform: translateX(8px) scale(.96); }
@@ -686,7 +686,7 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 }
 .certificate-current {
   transform-origin: center;
-  animation: certificate-focus-next 420ms cubic-bezier(.2,.75,.25,1) both;
+  animation: certificate-focus-next 820ms cubic-bezier(.2,.75,.25,1) both;
 }
 .slide-previous .certificate-current {
   animation-name: certificate-focus-previous;
