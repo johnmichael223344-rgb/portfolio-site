@@ -633,10 +633,44 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   background: var(--surface-raised);
   color: var(--cyan);
 }
-.certificate-carousel {
+.certificate-carousel-stage {
   display: grid;
-  max-width: 760px;
-  grid-template-columns: minmax(0, 1fr);
+  max-width: 1120px;
+  align-items: center;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 760px) minmax(0, 1fr);
+  overflow: hidden;
+}
+.certificate-carousel {
+  min-width: 0;
+  grid-column: 2;
+}
+.certificate-side-card {
+  min-width: 0;
+  height: 205px;
+  overflow: hidden;
+  padding: 22px 16px;
+  opacity: .48;
+  transform: scale(.92);
+}
+.certificate-side-card:first-child { grid-column: 1; }
+.certificate-side-card:last-child { grid-column: 3; }
+.certificate-side-card > span {
+  display: block;
+  overflow: hidden;
+  color: var(--cyan);
+  font: 8px "DM Mono", monospace;
+  letter-spacing: .08em;
+  text-overflow: clip;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.certificate-side-card h3 {
+  overflow: hidden;
+  margin: 20px 0 0;
+  color: var(--ink);
+  font: 600 17px/1.25 "Space Grotesk", system-ui, sans-serif;
+  white-space: nowrap;
 }
 .certificate-entry {
   display: flex;
@@ -671,10 +705,18 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   border-color: var(--cyan);
   color: var(--cyan);
 }
-.certificate-carousel-count {
-  color: var(--ink-muted);
-  font: 10px "DM Mono", monospace;
-  letter-spacing: .08em;
+.certificate-carousel-progress {
+  width: min(180px, 28vw);
+  height: 4px;
+  overflow: hidden;
+  background: var(--border);
+}
+.certificate-carousel-progress span {
+  display: block;
+  height: 100%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px rgba(67, 239, 255, .45);
+  transition: width 220ms ease;
 }
 .certificate-entry-meta {
   display: flex;
@@ -722,6 +764,9 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 .certificate-link:hover { color: var(--pink); border-color: var(--pink); }
 .certificate-link span { color: var(--pink); }
 @media (max-width: 620px) {
+  .certificate-carousel-stage { grid-template-columns: minmax(0, 1fr); }
+  .certificate-side-card { display: none; }
+  .certificate-carousel { grid-column: 1; }
   .certificate-entry { min-height: 220px; }
   .certificate-carousel-nav button { min-height: 42px; padding-inline: 10px; }
 }

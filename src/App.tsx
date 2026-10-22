@@ -219,6 +219,11 @@ export default function App() {
       certificate.category === activeCertificateCategory,
   );
   const activeCertificate = visibleCertificates[activeCertificateIndex] ?? visibleCertificates[0];
+  const certificateCount = visibleCertificates.length;
+  const previousCertificate =
+    visibleCertificates[(activeCertificateIndex - 1 + certificateCount) % certificateCount];
+  const nextCertificate =
+    visibleCertificates[(activeCertificateIndex + 1) % certificateCount];
   const moveCertificate = (direction: number) => {
     setActiveCertificateIndex(
       (index) => (index + direction + visibleCertificates.length) % visibleCertificates.length,
@@ -373,28 +378,42 @@ export default function App() {
               </button>
             ))}
           </div>
-          <div
-            className="certificate-carousel"
-            role="tabpanel"
-            aria-labelledby={`certificate-tab-${activeCertificateCategory}`}
-            aria-live="polite"
-          >
-            {activeCertificate && (
-              <article className="certificate-entry card" key={activeCertificate.file}>
-                <div className="certificate-entry-meta">
-                  <span>{certificateCategoryLabels[activeCertificate.category]}</span>
-                  <span>{activeCertificate.year}</span>
-                </div>
-                <h2>{activeCertificate.title}</h2>
-                <p>{activeCertificate.description}</p>
-                <a
-                  className="certificate-link"
-                  href={`${import.meta.env.BASE_URL}certificates/${activeCertificate.file}`}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  OPEN CERTIFICATE PDF <span aria-hidden="true">↗</span>
-                </a>
+                    <div className="certificate-carousel-stage">
+            {previousCertificate && (
+              <article className="certificate-side-card card" aria-hidden="true">
+                <span>{certificateCategoryLabels[previousCertificate.category]}</span>
+                <h3>{previousCertificate.title}</h3>
+              </article>
+            )}
+            <div
+              className="certificate-carousel"
+              role="tabpanel"
+              aria-labelledby={`certificate-tab-${activeCertificateCategory}`}
+              aria-live="polite"
+            >
+              {activeCertificate && (
+                <article className="certificate-entry card" key={activeCertificate.file}>
+                  <div className="certificate-entry-meta">
+                    <span>{certificateCategoryLabels[activeCertificate.category]}</span>
+                    <span>{activeCertificate.year}</span>
+                  </div>
+                  <h2>{activeCertificate.title}</h2>
+                  <p>{activeCertificate.description}</p>
+                  <a
+                    className="certificate-link"
+                    href={`${import.meta.env.BASE_URL}certificates/${activeCertificate.file}`}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    OPEN CERTIFICATE PDF <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
+              )}
+            </div>
+            {nextCertificate && (
+              <article className="certificate-side-card card" aria-hidden="true">
+                <span>{certificateCategoryLabels[nextCertificate.category]}</span>
+                <h3>{nextCertificate.title}</h3>
               </article>
             )}
           </div>
@@ -406,9 +425,17 @@ export default function App() {
             >
               <span aria-hidden="true">←</span> PREVIOUS
             </button>
-            <span className="certificate-carousel-count" aria-live="polite">
-              {activeCertificateIndex + 1} / {visibleCertificates.length}
-            </span>
+            <div
+              className="certificate-carousel-progress"
+              role="progressbar"
+              aria-label="Certificate carousel position"
+              aria-valuemin={1}
+              aria-valuemax={certificateCount}
+              aria-valuenow={activeCertificateIndex + 1}
+              aria-valuetext={`Certificate ${activeCertificateIndex + 1} of ${certificateCount}`}
+            >
+              <span style={{ width: `${((activeCertificateIndex + 1) / certificateCount) * 100}%` }} />
+            </div>
             <button
               type="button"
               onClick={() => moveCertificate(1)}
