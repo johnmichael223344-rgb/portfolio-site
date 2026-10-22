@@ -859,6 +859,7 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   color: var(--cyan);
   font: inherit;
   font-weight: 700;
+  font-style: italic;
   padding: 0;
   cursor: pointer;
 }
