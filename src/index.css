@@ -634,38 +634,53 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   color: var(--cyan);
 }
 .certificate-carousel-stage {
+  position: relative;
   display: grid;
   max-width: 1120px;
   align-items: center;
-  gap: 14px;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 760px) minmax(0, 1fr);
-  overflow: hidden;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: visible;
   perspective: 1200px;
   perspective-origin: center;
   transform-style: preserve-3d;
 }
 .certificate-carousel {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 760px);
   min-width: 0;
-  grid-column: 2;
+  margin-inline: auto;
+  grid-column: 1;
 }
 .certificate-side-card {
-  min-width: 0;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: min(35%, 390px);
   height: 205px;
   overflow: hidden;
+  margin-top: -102.5px;
   padding: 22px 16px;
-  opacity: .48;
-  transform: translateZ(-70px) rotateY(24deg) scale(.78);
-  transform-origin: center;
+  opacity: .62;
+  transform: translateZ(-100px) rotateY(34deg) scale(.82);
   transform-style: preserve-3d;
   backface-visibility: hidden;
   transition: opacity 820ms ease, transform 900ms cubic-bezier(.2,.75,.25,1);
 }
-.certificate-side-card:first-child { transform: translateZ(-70px) rotateY(24deg) scale(.78); }
-.certificate-side-card:last-child { transform: translateZ(-70px) rotateY(-24deg) scale(.78); }
-.slide-next .certificate-side-card:first-child { opacity: .38; transform: translateX(-10px) translateZ(-90px) rotateY(30deg) scale(.74); }
-.slide-next .certificate-side-card:last-child { opacity: .72; transform: translateX(6px) translateZ(-45px) rotateY(-18deg) scale(.84); }
-.slide-previous .certificate-side-card:first-child { opacity: .72; transform: translateX(-6px) translateZ(-45px) rotateY(18deg) scale(.84); }
-.slide-previous .certificate-side-card:last-child { opacity: .38; transform: translateX(10px) translateZ(-90px) rotateY(-30deg) scale(.74); }
+.certificate-side-card:first-child {
+  left: 0;
+  transform-origin: right center;
+  transform: translateZ(-80px) rotateY(34deg) scale(.82);
+}
+.certificate-side-card:last-child {
+  right: 0;
+  transform-origin: left center;
+  transform: translateZ(-80px) rotateY(-34deg) scale(.82);
+}
+.slide-next .certificate-side-card:first-child { opacity: .4; transform: translateX(-10px) translateZ(-110px) rotateY(38deg) scale(.78); }
+.slide-next .certificate-side-card:last-child { opacity: .72; transform: translateX(6px) translateZ(-55px) rotateY(-25deg) scale(.9); }
+.slide-previous .certificate-side-card:first-child { opacity: .72; transform: translateX(-6px) translateZ(-55px) rotateY(25deg) scale(.9); }
+.slide-previous .certificate-side-card:last-child { opacity: .4; transform: translateX(10px) translateZ(-110px) rotateY(-38deg) scale(.78); }
 .slide-next .certificate-side-card:first-child { animation: coverflow-enter-left 900ms cubic-bezier(.2,.75,.25,1) both; }
 .slide-next .certificate-side-card:last-child { animation: coverflow-enter-right 900ms cubic-bezier(.2,.75,.25,1) both; }
 .slide-previous .certificate-side-card:first-child { animation: coverflow-enter-left-reverse 900ms cubic-bezier(.2,.75,.25,1) both; }
@@ -814,16 +829,25 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 @media (max-width: 620px) {
   .certificate-carousel-nav { margin-left: 0; }
   .certificate-carousel-stage {
+    display: grid;
     gap: 5px;
-    grid-template-columns: minmax(34px, 7vw) minmax(0, 1fr) minmax(34px, 7vw);
+    grid-template-columns: minmax(38px, 9vw) minmax(0, 1fr) minmax(38px, 9vw);
+    overflow: hidden;
   }
   .certificate-side-card {
-    display: block;
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: auto;
     height: 180px;
+    margin-top: 0;
     padding: 14px 8px;
   }
+  .certificate-side-card:first-child { grid-column: 1; }
+  .certificate-side-card:last-child { grid-column: 3; }
   .certificate-side-card h3 { font-size: 12px; }
-  .certificate-carousel { grid-column: 2; }
+  .certificate-carousel { width: auto; grid-column: 2; }
   .certificate-entry { min-height: 220px; }
   .certificate-carousel-nav button { min-height: 42px; padding-inline: 10px; }
 }
