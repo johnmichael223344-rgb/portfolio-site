@@ -144,7 +144,7 @@ const skyline = Array.from({ length: 24 }, (_, index) => ({
 }));
 
 function SectionLabel({ children }: { children: ReactNode }) {
-  return <p className="section-label">{children}</p>;
+  return <h2 className="section-label">{children}</h2>;
 }
 
 function Cityscape() {
