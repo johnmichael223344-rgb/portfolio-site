@@ -666,6 +666,26 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 .slide-next .certificate-side-card:last-child { opacity: .72; transform: translateX(6px) translateZ(-45px) rotateY(-18deg) scale(.84); }
 .slide-previous .certificate-side-card:first-child { opacity: .72; transform: translateX(-6px) translateZ(-45px) rotateY(18deg) scale(.84); }
 .slide-previous .certificate-side-card:last-child { opacity: .38; transform: translateX(10px) translateZ(-90px) rotateY(-30deg) scale(.74); }
+.slide-next .certificate-side-card:first-child { animation: coverflow-enter-left 900ms cubic-bezier(.2,.75,.25,1) both; }
+.slide-next .certificate-side-card:last-child { animation: coverflow-enter-right 900ms cubic-bezier(.2,.75,.25,1) both; }
+.slide-previous .certificate-side-card:first-child { animation: coverflow-enter-left-reverse 900ms cubic-bezier(.2,.75,.25,1) both; }
+.slide-previous .certificate-side-card:last-child { animation: coverflow-enter-right-reverse 900ms cubic-bezier(.2,.75,.25,1) both; }
+@keyframes coverflow-enter-left {
+  from { opacity: .15; transform: translateX(70px) translateZ(0) rotateY(0) scale(.92); }
+  to { opacity: .38; transform: translateX(-10px) translateZ(-90px) rotateY(30deg) scale(.74); }
+}
+@keyframes coverflow-enter-right {
+  from { opacity: .3; transform: translateX(46px) translateZ(-100px) rotateY(-34deg) scale(.68); }
+  to { opacity: .72; transform: translateX(6px) translateZ(-45px) rotateY(-18deg) scale(.84); }
+}
+@keyframes coverflow-enter-left-reverse {
+  from { opacity: .3; transform: translateX(-46px) translateZ(-100px) rotateY(34deg) scale(.68); }
+  to { opacity: .72; transform: translateX(-6px) translateZ(-45px) rotateY(18deg) scale(.84); }
+}
+@keyframes coverflow-enter-right-reverse {
+  from { opacity: .15; transform: translateX(-70px) translateZ(0) rotateY(0) scale(.92); }
+  to { opacity: .38; transform: translateX(10px) translateZ(-90px) rotateY(-30deg) scale(.74); }
+}
 .certificate-side-card:first-child { grid-column: 1; }
 .certificate-side-card:last-child { grid-column: 3; }
 .certificate-side-card > span {
