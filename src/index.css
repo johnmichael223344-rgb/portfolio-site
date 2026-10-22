@@ -769,3 +769,44 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
+
+
+/* Mobile certificate carousel: keep arrows below the card so they never cover copy. */
+@media (max-width: 620px) {
+  .certificate-carousel-controls {
+    position: static;
+    width: 100%;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+    transform: none;
+  }
+  .certificate-carousel-controls button {
+    width: 40px;
+    height: 40px;
+    background: var(--surface);
+  }
+  .certificate-entry {
+    min-height: 0;
+    padding: 20px;
+  }
+  .certificate-entry h2 {
+    margin-top: 14px;
+    font-size: clamp(19px, 5vw, 22px);
+    overflow-wrap: anywhere;
+  }
+  .certificate-entry p {
+    margin: 0 0 18px;
+    line-height: 1.55;
+  }
+  .certificate-link {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 620px) and (prefers-reduced-motion: no-preference) {
+  .hero::after {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
