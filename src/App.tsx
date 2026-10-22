@@ -218,6 +218,7 @@ export default function App() {
               </div>
             </div>
             <div className="hero-index" aria-hidden="true">
+              <img className="hero-index-photo" src={`${import.meta.env.BASE_URL}images/temporary-profile.jpg`} alt="" />
               <span>&ldquo;{verse.quote}&rdquo;</span>
               <strong>1009</strong>
               <i />

@@ -571,3 +571,34 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
       linear-gradient(0deg, rgba(13,14,25,.24), transparent 48%);
   }
 }
+
+
+/* Temporary square profile picture in the hero */
+.hero-index-photo {
+  display: block;
+  width: clamp(112px, 13vw, 156px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid rgba(243, 220, 209, .78);
+  box-shadow: 5px 5px 0 rgba(167, 80, 94, .8);
+  margin-bottom: 12px;
+}
+@media (max-width: 800px) {
+  .hero-index {
+    display: grid;
+    position: absolute;
+    z-index: 3;
+    top: 14px;
+    right: max(24px, calc((100vw - 1120px) / 2));
+    gap: 3px;
+  }
+  .hero-index-photo { width: 76px; margin-bottom: 3px; }
+  .hero-index > span { font-size: 7px; }
+  .hero-index strong { font-size: 22px; }
+  .hero-index i { width: 42px; margin: 3px 0; }
+}
+@media (max-width: 620px) {
+  .hero-index { top: 10px; right: 16px; }
+  .hero-index-photo { width: 66px; }
+  .hero-index > span { max-width: 130px; font-size: 6px; }
+}
