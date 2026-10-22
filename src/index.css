@@ -294,12 +294,24 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   .theme-toggle { min-height: 36px; font-size: 8px; padding: 0 9px; }
   .hero { min-height: 720px; min-height: min(760px, calc(100svh - 66px)); align-items: flex-start; }
   .hero-inner { padding-top: 84px; padding-bottom: 180px; }
+  .hero-copy {
+    position: relative;
+    z-index: 1;
+    margin: -14px;
+    border-left: 2px solid rgba(67, 239, 255, .6);
+    background: linear-gradient(90deg, rgba(7, 11, 27, .96), rgba(7, 11, 27, .88) 78%, rgba(7, 11, 27, 0));
+    padding: 14px 14px 22px;
+  }
   .hero h1 { font-size: clamp(21px, 7vw, 34px); }
   .hero-role { max-width: 390px; font-size: 15px; }
   .hero-availability { font-size: 8px; }
   .hero-kicker { font-size: 9px; }
   .hero-tags span { font-size: 7px; }
   .planet-orbit { top: 8%; right: 4%; width: 86px; opacity: .74; }
+  .skyline { height: 43%; }
+  .skyline-back { height: 48%; }
+  .tower { height: 42%; }
+  .tower-right { height: 50%; }
   .sign-helix { top: 43%; left: 5%; }
   .sign-delta { display: none; }
   .sign-arcade { top: 50%; right: 4%; }
