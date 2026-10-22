@@ -640,6 +640,9 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   gap: 14px;
   grid-template-columns: minmax(0, 1fr) minmax(0, 760px) minmax(0, 1fr);
   overflow: hidden;
+  perspective: 1200px;
+  perspective-origin: center;
+  transform-style: preserve-3d;
 }
 .certificate-carousel {
   min-width: 0;
@@ -651,14 +654,18 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   overflow: hidden;
   padding: 22px 16px;
   opacity: .48;
-  transform: scale(.92);
+  transform: translateZ(-70px) rotateY(24deg) scale(.78);
   transform-origin: center;
-  transition: opacity 760ms ease, transform 820ms cubic-bezier(.2,.75,.25,1);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: opacity 820ms ease, transform 900ms cubic-bezier(.2,.75,.25,1);
 }
-.slide-next .certificate-side-card:first-child { opacity: .34; transform: translateX(-12px) scale(.88); }
-.slide-next .certificate-side-card:last-child { opacity: .62; transform: translateX(8px) scale(.96); }
-.slide-previous .certificate-side-card:first-child { opacity: .62; transform: translateX(-8px) scale(.96); }
-.slide-previous .certificate-side-card:last-child { opacity: .34; transform: translateX(12px) scale(.88); }
+.certificate-side-card:first-child { transform: translateZ(-70px) rotateY(24deg) scale(.78); }
+.certificate-side-card:last-child { transform: translateZ(-70px) rotateY(-24deg) scale(.78); }
+.slide-next .certificate-side-card:first-child { opacity: .38; transform: translateX(-10px) translateZ(-90px) rotateY(30deg) scale(.74); }
+.slide-next .certificate-side-card:last-child { opacity: .72; transform: translateX(6px) translateZ(-45px) rotateY(-18deg) scale(.84); }
+.slide-previous .certificate-side-card:first-child { opacity: .72; transform: translateX(-6px) translateZ(-45px) rotateY(18deg) scale(.84); }
+.slide-previous .certificate-side-card:last-child { opacity: .38; transform: translateX(10px) translateZ(-90px) rotateY(-30deg) scale(.74); }
 .certificate-side-card:first-child { grid-column: 1; }
 .certificate-side-card:last-child { grid-column: 3; }
 .certificate-side-card > span {
@@ -685,6 +692,8 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   padding: clamp(20px, 3vw, 28px);
 }
 .certificate-current {
+  position: relative;
+  z-index: 2;
   transform-origin: center;
   animation: certificate-focus-next 820ms cubic-bezier(.2,.75,.25,1) both;
 }
@@ -784,9 +793,17 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 .certificate-link span { color: var(--pink); }
 @media (max-width: 620px) {
   .certificate-carousel-nav { margin-left: 0; }
-  .certificate-carousel-stage { grid-template-columns: minmax(0, 1fr); }
-  .certificate-side-card { display: none; }
-  .certificate-carousel { grid-column: 1; }
+  .certificate-carousel-stage {
+    gap: 5px;
+    grid-template-columns: minmax(34px, 7vw) minmax(0, 1fr) minmax(34px, 7vw);
+  }
+  .certificate-side-card {
+    display: block;
+    height: 180px;
+    padding: 14px 8px;
+  }
+  .certificate-side-card h3 { font-size: 12px; }
+  .certificate-carousel { grid-column: 2; }
   .certificate-entry { min-height: 220px; }
   .certificate-carousel-nav button { min-height: 42px; padding-inline: 10px; }
 }
