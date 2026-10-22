@@ -136,7 +136,7 @@ export default function App() {
             <span className="brand-mark">JM</span>
             <span className="brand-copy">
               <strong>MAIKERU</strong>
-              <small>DESIGN / CODE</small>
+              <small>DEVELOPER</small>
             </span>
           </a>
           <nav aria-label="Main navigation">
@@ -198,10 +198,10 @@ export default function App() {
               </div>
             </div>
             <div className="hero-index" aria-hidden="true">
-              <span>CREATIVE FILE</span>
-              <strong>001</strong>
+              <span>&ldquo;I CAN DO ALL THINGS&rdquo;</span>
+              <strong>1009</strong>
               <i />
-              <span>MANILA, PH</span>
+              <span>PHILIPPIANS 4:13</span>
             </div>
           </div>
           <a className="scroll-cue" href="#about">
