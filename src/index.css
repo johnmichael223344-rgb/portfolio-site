@@ -821,3 +821,33 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 
 .certificate-control-label { display: inline; }
 .certificate-control-arrow { display: none; }
+
+
+/* Place labeled carousel controls in a rectangular row beneath the card. */
+.certificate-carousel-controls {
+  position: static;
+  width: min(100%, 760px);
+  justify-content: space-between;
+  gap: 12px;
+  margin: 14px auto 0;
+  transform: none;
+  pointer-events: auto;
+}
+.certificate-carousel-controls button {
+  width: auto;
+  min-width: 88px;
+  height: 40px;
+  border-radius: 0;
+  padding: 0 14px;
+}
+@media (max-width: 620px) {
+  .certificate-carousel-controls {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+  .certificate-carousel-controls button {
+    min-width: 78px;
+    height: 38px;
+  }
+}
