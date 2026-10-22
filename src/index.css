@@ -686,6 +686,7 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 .certificate-carousel-nav {
   display: flex;
   max-width: 760px;
+  margin-left: max(0px, calc((100% - 760px) / 2));
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -764,6 +765,7 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 .certificate-link:hover { color: var(--pink); border-color: var(--pink); }
 .certificate-link span { color: var(--pink); }
 @media (max-width: 620px) {
+  .certificate-carousel-nav { margin-left: 0; }
   .certificate-carousel-stage { grid-template-columns: minmax(0, 1fr); }
   .certificate-side-card { display: none; }
   .certificate-carousel { grid-column: 1; }
