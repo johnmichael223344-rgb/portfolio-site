@@ -904,9 +904,18 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
 
 
 @media (max-width: 620px) {
+  /* Use the same background treatment as desktop on mobile. */
+  .city-scene {
+    background:
+      radial-gradient(ellipse at 50% 44%, rgba(255, 177, 158, .5) 0%, rgba(215, 116, 137, .24) 24%, transparent 51%),
+      linear-gradient(180deg, #242541 0%, #514264 24%, #a65c78 42%, #e58b88 51%, #9a5d74 63%, #39324b 78%, #171722 100%);
+  }
+  .city-scene::after {
+    background: linear-gradient(90deg, rgba(11, 11, 20, .34), rgba(11, 11, 20, .1) 55%, transparent 100%);
+  }
   .hero::after {
-    background: transparent;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
+    background: rgba(0, 0, 0, .68);
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
   }
 }
