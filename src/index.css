@@ -777,3 +777,11 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   .certificate-carousel-nav button[aria-pressed="true"] { width: 40px; }
   .certificate-entry { min-height: 220px; }
 }
+
+
+/* Soft dark blur overlay for the #top hero background */
+.hero::after {
+  background: linear-gradient(90deg, rgba(0, 0, 0, .42), rgba(0, 0, 0, .2) 58%, rgba(0, 0, 0, .08));
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
