@@ -213,6 +213,8 @@ export default function App() {
   const [activeCertificateCategory, setActiveCertificateCategory] =
     useState<CertificateCategory>("all");
   const [activeCertificateIndex, setActiveCertificateIndex] = useState(0);
+  const [certificateDirection, setCertificateDirection] =
+    useState<"next" | "previous">("next");
   const visibleCertificates = certificates.filter(
     (certificate) =>
       activeCertificateCategory === "all" ||
@@ -225,6 +227,7 @@ export default function App() {
   const nextCertificate =
     visibleCertificates[(activeCertificateIndex + 1) % certificateCount];
   const moveCertificate = (direction: number) => {
+    setCertificateDirection(direction > 0 ? "next" : "previous");
     setActiveCertificateIndex(
       (index) => (index + direction + visibleCertificates.length) % visibleCertificates.length,
     );
@@ -370,6 +373,7 @@ export default function App() {
                 onClick={() => {
                   setActiveCertificateCategory(category);
                   setActiveCertificateIndex(0);
+                  setCertificateDirection("next");
                 }}
                 role="tab"
                 type="button"
@@ -378,9 +382,10 @@ export default function App() {
               </button>
             ))}
           </div>
-                    <div className="certificate-carousel-stage">
+                    <div className={`certificate-carousel-stage slide-${certificateDirection}`}>
+
             {previousCertificate && (
-              <article className="certificate-side-card card" aria-hidden="true">
+              <article key={`previous-${previousCertificate.file}`} className="certificate-side-card card" aria-hidden="true">
                 <span>{certificateCategoryLabels[previousCertificate.category]}</span>
                 <h3>{previousCertificate.title}</h3>
               </article>
@@ -392,7 +397,7 @@ export default function App() {
               aria-live="polite"
             >
               {activeCertificate && (
-                <article className="certificate-entry card" key={activeCertificate.file}>
+                <article className="certificate-entry certificate-current card" key={`${activeCertificateCategory}-${activeCertificate.file}`}>
                   <div className="certificate-entry-meta">
                     <span>{certificateCategoryLabels[activeCertificate.category]}</span>
                     <span>{activeCertificate.year}</span>
@@ -411,7 +416,7 @@ export default function App() {
               )}
             </div>
             {nextCertificate && (
-              <article className="certificate-side-card card" aria-hidden="true">
+              <article key={`next-${nextCertificate.file}`} className="certificate-side-card card" aria-hidden="true">
                 <span>{certificateCategoryLabels[nextCertificate.category]}</span>
                 <h3>{nextCertificate.title}</h3>
               </article>
