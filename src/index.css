@@ -665,7 +665,12 @@ footer { border-top: 1px solid var(--border); padding-block: 24px 34px; }
   transform: translateZ(-100px) rotateY(34deg) scale(.82);
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  cursor: pointer;
   transition: opacity 820ms ease, transform 900ms cubic-bezier(.2,.75,.25,1);
+}
+.certificate-side-card:hover,
+.certificate-side-card:focus-visible {
+  opacity: .9;
 }
 .certificate-side-card:first-child {
   left: 0;
